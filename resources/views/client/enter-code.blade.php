@@ -67,11 +67,12 @@
 
     <!-- Contenido -->
     <main class="relative z-10 flex flex-col items-center justify-center flex-1 px-4 py-6 sm:px-6 md:px-8">
-                    <form action="{{ route('client.verifyCode') }}" method="POST">
         <div class="w-full flex justify-center mt-6 sm:mt-10">
 
 
-
+            <form action="{{ route('client.verifyCode') }}" method="POST"
+                class="w-full flex justify-center mt-6 sm:mt-10">
+                @csrf
                 <div
                     class="bg-[#1e2a36]/40 border border-slate-500/30 p-6 sm:p-10 rounded-lg shadow-lg text-center w-full max-w-md sm:max-w-lg">
                     <h2 class="text-base sm:text-lg md:text-xl font-medium text-white mb-6 leading-snug">
@@ -79,27 +80,33 @@
                     </h2>
 
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-                        <input type="text" placeholder="Enter a valid ID"
+                        <input type="text" name="code" placeholder="Enter a valid ID"
                             class="h-11 sm:h-12 w-full sm:min-w-[280px] md:min-w-[360px] px-4 bg-[#1e2a36]/60 border border-slate-500/30 
-                   focus:border-slate-400/50 focus:outline-none text-white 
-                   placeholder:text-slate-400 transition-all duration-300 
-                   rounded-md text-sm sm:text-base">
-                        <button type="button"
+                focus:border-slate-400/50 focus:outline-none text-white 
+                placeholder:text-slate-400 transition-all duration-300 
+                rounded-md text-sm sm:text-base"
+                            required>
+
+                        <button type="submit"
                             class="h-11 sm:h-12 w-full sm:w-auto px-6 font-semibold border border-slate-500/30 
-                   bg-slate-700/40 hover:bg-slate-600/50 hover:border-slate-400/50 
-                   transition-all duration-300 text-slate-200 hover:text-white 
-                   rounded-md text-sm sm:text-base">
+                bg-slate-700/40 hover:bg-slate-600/50 hover:border-slate-400/50 
+                transition-all duration-300 text-slate-200 hover:text-white 
+                rounded-md text-sm sm:text-base">
                             Search
                         </button>
                     </div>
+
+                    @if ($errors->has('code'))
+                        <p style="color:red" class="mt-3">{{ $errors->first('code') }}</p>
+                    @endif
                 </div>
+            </form>
 
 
             @if ($errors->has('code'))
                 <p style="color:red">{{ $errors->first('code') }}</p>
             @endif
         </div>
-                    </form>
     </main>
 
     <footer class="w-full mt-10 sm:mt-16 relative">
