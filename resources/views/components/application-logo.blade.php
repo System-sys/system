@@ -1,0 +1,1 @@
+<img src="{{ asset('Tlogo.png') }}" alt="Logo" {{ $attributes }}>
