@@ -1,3 +1,4 @@
+import './verify';
 import './bootstrap';
 
 import Alpine from 'alpinejs';
