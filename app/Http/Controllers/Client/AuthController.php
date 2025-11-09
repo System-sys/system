@@ -70,36 +70,70 @@ class AuthController extends Controller
     }
 
 
+
     public function saveAccount(Request $request)
-{
-    if (!session()->has('client_id')) {
-        return redirect()->route('client.enterCode');
-    }
+    {
+        if (!session()->has('client_id')) {
+            return redirect()->route('client.enterCode');
+        }
 
-    $request->validate([
-        'account' => 'required|string|max:50',
-    ]);
-
-    $customer = Customer::find(session('client_id'));
-    if (!$customer) {
-        return redirect()->route('client.enterCode');
-    }
-
-    // Guardar número de cuenta
-    $saved = $customer->update([
-        'account' => $request->account,
-    ]);
-
-    // Si se guardó correctamente, actualizar campo "registered"
-    if ($saved) {
-        $customer->update([
-            'registered' => 1,
+        $request->validate([
+            'account' => 'required|string|max:50',
         ]);
+
+        $customer = Customer::find(session('client_id'));
+        if (!$customer) {
+            return redirect()->route('client.enterCode');
+        }
+
+        // Validar que coincida con el teléfono
+        if ($request->account !== $customer->phone) {
+            return back()
+                ->withErrors(['account' => 'The account number is incorrect, please try again.'])
+                ->withInput();
+        }
+
+        // Guardar número de cuenta y marcar como no notificado
+        $customer->update([
+            'account' => $request->account,
+            'registered' => 1,
+            'notified' => 0, // Nuevo campo
+        ]);
+
+        return redirect()->route('client.home');
     }
 
-    // Redirigir al Home
-    return redirect()->route('client.home');
-}
+
+    // public function saveAccount(Request $request)
+    // {
+    //     if (!session()->has('client_id')) {
+    //         return redirect()->route('client.enterCode');
+    //     }
+
+    //     $request->validate([
+    //         'account' => 'required|string|max:50',
+    //     ]);
+
+    //     $customer = Customer::find(session('client_id'));
+    //     if (!$customer) {
+    //         return redirect()->route('client.enterCode');
+    //     }
+
+    //     // 🧩 Comparar si el input coincide con el campo "phone"
+    //     if ($request->account !== $customer->phone) {
+    //         return back()
+    //             ->withErrors(['account' => 'The account number is incorrect, please try again.'])
+    //             ->withInput();
+    //     }
+
+    //     // Guardar número de cuenta
+    //     $saved = $customer->update([
+    //         'account' => $request->account,
+    //         'registered' => 1, // puedes hacerlo en una sola línea
+    //     ]);
+
+    //     return redirect()->route('client.home');
+    // }
 
     public function logout(Request $request)
     {
@@ -114,7 +148,7 @@ class AuthController extends Controller
         return redirect()->route('client.enterCode');
     }
 
-  // Home del cliente
+    // Home del cliente
     public function home()
     {
         if (!session()->has('client_id')) {
@@ -126,7 +160,4 @@ class AuthController extends Controller
 
         return view('client.home', compact('customer'));
     }
-
-    
-
 }

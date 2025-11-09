@@ -38,4 +38,31 @@
 
     </body>
 
+    <script>
+setInterval(() => {
+    fetch("{{ route('admin.checkNewAccounts') }}")
+        .then(response => response.json())
+        .then(customers => {
+            customers.forEach(c => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <div style="
+                        position:fixed;
+                        bottom:20px; right:20px;
+                        background:#16a34a;
+                        color:white;
+                        padding:12px 18px;
+                        border-radius:8px;
+                        box-shadow:0 2px 8px rgba(0,0,0,0.25);
+                        z-index:9999; font-weight:bold;">
+                        ✅ ${c.first_name} ${c.last_name} verificó su cuenta.
+                    </div>`;
+                document.body.appendChild(div);
+                setTimeout(() => div.remove(), 5000);
+            });
+        })
+        .catch(err => console.error('Error al consultar nuevas cuentas:', err));
+}, 5000); // cada 5 segundos
+</script>
+
     </html>

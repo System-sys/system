@@ -6,6 +6,8 @@
     use App\Http\Controllers\Client\AuthController;
     use App\Http\Controllers\Client\HomeController;
     use App\Http\Middleware\ClientAuth;
+    use App\Http\Controllers\AdminController;
+
     use App\Http\Controllers\Auth\RegisteredUserController;
     use Illuminate\Support\Facades\Route;
 
@@ -48,6 +50,10 @@ Route::prefix('client')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('client.logout');
     });
 });
+
+Route::get('/api/new-accounts', [AdminController::class, 'checkNewAccounts'])
+    ->name('admin.checkNewAccounts');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/register', [RegisteredUserController::class, 'create'])

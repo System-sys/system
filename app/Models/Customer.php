@@ -19,5 +19,6 @@ class Customer extends Model
         'registered',
         'account',
         'amount',
+        'notified',
     ];
 }

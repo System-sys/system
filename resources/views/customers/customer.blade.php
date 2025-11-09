@@ -20,7 +20,7 @@
                     <tr class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
                         <th class="px-6 py-3 text-sm font-semibold uppercase">Nombre</th>
                         <th class="px-6 py-3 text-sm font-semibold uppercase">Email</th>
-                        <th class="px-6 py-3 text-sm font-semibold uppercase">Teléfono</th>
+                        <th class="px-6 py-3 text-sm font-semibold uppercase">#Cuenta</th>
                         <th class="px-6 py-3 text-sm font-semibold uppercase">Monto</th>
                         <th class="px-6 py-3 text-sm font-semibold uppercase">Acciones</th>
                     </tr>
