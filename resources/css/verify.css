@@ -1,0 +1,115 @@
+ @keyframes gridglow {
+     0% {
+         transform: translateX(-50%) translateY(-50%) rotate(0deg);
+         opacity: 0.2;
+     }
+
+     50% {
+         transform: translateX(50%) translateY(50%) rotate(180deg);
+         opacity: 0.5;
+     }
+
+     100% {
+         transform: translateX(-50%) translateY(-50%) rotate(360deg);
+         opacity: 0.2;
+     }
+ }
+
+ /* === EFECTO MAQUINA DE ESCRIBIR SIN CURSOR FINAL === */
+ @keyframes typing {
+     from {
+         width: 0;
+     }
+
+     to {
+         width: var(--typewriter-width);
+     }
+ }
+
+ .typewriter {
+     display: inline-block;
+     overflow: hidden;
+     white-space: nowrap;
+     border-right: 2px solid rgba(255, 255, 255, 0.75);
+     animation: typing 2.8s steps(var(--characters)) 1 normal both;
+ }
+
+ .typewriter.finished {
+     border-right: none;
+ }
+
+ @keyframes gridglow {
+     0% {
+         transform: translateX(-50%) translateY(-50%) rotate(0deg);
+         opacity: 0.2;
+     }
+
+     50% {
+         transform: translateX(50%) translateY(50%) rotate(180deg);
+         opacity: 0.5;
+     }
+
+     100% {
+         transform: translateX(-50%) translateY(-50%) rotate(360deg);
+         opacity: 0.2;
+     }
+ }
+
+
+
+ .main-btn {
+     background: linear-gradient(135deg, #3b82f6, #06b6d4);
+     color: white;
+     width: 3.5rem;
+     height: 3.5rem;
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 1.4rem;
+     box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+     cursor: pointer;
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+     animation: pulseGlow 2.5s infinite;
+ }
+
+ @keyframes pulseGlow {
+
+     0%,
+     100% {
+         box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+     }
+
+     50% {
+         box-shadow: 0 0 20px rgba(56, 189, 248, 0.8);
+     }
+ }
+
+ .main-btn:hover {
+     transform: rotate(45deg) scale(1.05);
+ }
+
+
+ /* Adaptación responsiva */
+ @media (max-width: 640px) {
+     .floating-ticker-bar {
+         bottom: 15px;
+         flex-wrap: wrap;
+         justify-content: center;
+         gap: 6px;
+         padding: 0.5rem;
+         width: 95%;
+     }
+
+     .floating-ticker-bar div {
+         flex: 1 1 90px;
+         justify-content: center;
+     }
+ }
+
+ @media (max-width: 640px) {
+     .social-bubble {
+         bottom: 1rem;
+         right: 1rem;
+     }
+ }

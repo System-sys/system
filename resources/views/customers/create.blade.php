@@ -53,11 +53,17 @@
                         class="mt-1 w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                 </div>
 
-                <div class="w-full">
-                    <label for="amount"
-                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">Monto</label>
-                    <input type="number" step="0.01" name="amount" id="amount" value="{{ old('amount') }}"
-                        class="mt-1 w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
+                <div class="w-full flex justify-center">
+                    <div class="w-1/2">
+                        <label for="amount"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 text-center">
+                            Monto
+                        </label>
+                        <input type="number" step="0.01" name="amount" id="amount" value="{{ old('amount') }}"
+                            inputmode="decimal" pattern="[0-9]+([.][0-9]{1,2})?"
+                            class="mt-1 w-full px-4 py-3 text-lg font-bold border-2 border-gray-400 dark:border-gray-500 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-blue-600 dark:bg-gray-700 dark:text-white text-center"
+                            required>
+                    </div>
                 </div>
 
                 <div class="flex mt-6 w-full max-w-md mx-auto">
