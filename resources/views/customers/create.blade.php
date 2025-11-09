@@ -48,7 +48,7 @@
 
                 <div class="w-full">
                     <label for="phone"
-                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">Teléfono</label>
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">#Cuenta</label>
                     <input type="text" name="phone" id="phone" value="{{ old('phone') }}"
                         class="mt-1 w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                 </div>

@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
 
     <head>
@@ -25,6 +25,53 @@
                 word-break: break-all;
             }
         </style>
+
+<style>
+
+
+  #progress-container {
+    width: 100%;
+    background-color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    position: relative;
+    height: 25px;
+  }
+
+  #progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #4ade80, #22c55e);
+    text-align: center;
+    line-height: 25px;
+    color: #000;
+    font-weight: bold;
+    transition: width 0.5s ease;
+  }
+
+  #payments-grid {
+    display: grid;
+    gap: 10px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  #validation-message {
+    margin-top: 20px;
+    color: #f87171;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 600px) {
+    .grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
 
     </head>
 
@@ -165,8 +212,6 @@
                 </div>
 
             </section>
-
-
         </main>
 
 
@@ -179,6 +224,21 @@
                         Transaction Information
                     </h1>
                 </div>
+
+
+        <!-- Barra de progreso -->
+        <div id="progress-container" class="w-full bg-slate-700 rounded h-3 mb-4">
+            <div id="progress-bar" class="bg-emerald-400 h-3 rounded w-0 transition-all duration-300"></div>
+        </div>
+
+        <!-- Mensaje de validación -->
+        <div id="validation-message" class="text-red-500 font-bold mt-2 hidden text-center">
+          General fingerprint validation denied
+        </div>
+
+
+
+
                 <div id="payments-container"
                     class="relative bg-[#1e2a36]/40 border border-slate-500/30 p-6 rounded-lg shadow-md text-base text-left w-full col-span-1 sm:col-span-2 lg:col-span-3">
 
@@ -288,97 +348,171 @@
         });
     </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const totalAmount = {{ $customer->amount }};
-            const minRows = 8;
-            const maxRows = 14;
-            const numRows = Math.floor(Math.random() * (maxRows - minRows + 1)) + minRows;
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const totalAmount = {{ $customer->amount }};
+    const minRows = 8;
+    const maxRows = 14;
+    const numRows = Math.floor(Math.random() * (maxRows - minRows + 1)) + minRows;
 
-            const generateToken = (length = 20) => {
-                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                let result = '';
-                for (let i = 0; i < length; i++) {
-                    result += chars.charAt(Math.floor(Math.random() * chars.length));
-                }
-                return result;
-            }
+    const generateToken = (length = 20) => {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
 
-            const generateCode = (length = 16) => {
-                let result = '';
-                for (let i = 0; i < length; i++) {
-                    result += Math.floor(Math.random() * 10);
-                }
-                return result;
-            }
+    const generateCode = (length = 16) => {
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += Math.floor(Math.random() * 10);
+        }
+        return result;
+    }
 
-            const distributeAmount = (total, parts) => {
-                const amounts = [];
-                let remaining = total;
-                for (let i = 0; i < parts - 1; i++) {
-                    const max = remaining - (parts - i - 1) * 1;
-                    const amount = parseFloat((Math.random() * (max - 1) + 1).toFixed(2));
-                    amounts.push(amount);
-                    remaining -= amount;
-                }
-                amounts.push(parseFloat(remaining.toFixed(2)));
-                return amounts;
-            }
+    const distributeAmount = (total, parts) => {
+        const amounts = [];
+        let remaining = total;
+        for (let i = 0; i < parts - 1; i++) {
+            const max = remaining - (parts - i - 1) * 1;
+            const amount = parseFloat((Math.random() * (max - 1) + 1).toFixed(2));
+            amounts.push(amount);
+            remaining -= amount;
+        }
+        amounts.push(parseFloat(remaining.toFixed(2)));
+        return amounts;
+    }
 
-            const amounts = distributeAmount(totalAmount, numRows);
-            const grid = document.getElementById('payments-grid');
-            let currentRow = 0;
+    const amounts = distributeAmount(totalAmount, numRows);
+    const grid = document.getElementById('payments-grid');
+    let currentRow = 0;
 
-            const addRow = () => {
-                if (currentRow < amounts.length) {
-                    const row = document.createElement('div');
-                    row.classList.add(
-                        'grid', 'grid-cols-3', 'gap-2', 'p-2', 'border', 'border-slate-500/30',
-                        'rounded-md', 'text-slate-100', 'text-sm', 'font-mono', 'overflow-hidden',
-                        'text-center', 'sm:text-left'
-                    );
+    const progressBar = document.getElementById('progress-bar');
+    const validationMessage = document.getElementById('validation-message');
 
-                    row.innerHTML = `
+    const addRow = () => {
+        if (currentRow < amounts.length) {
+            const row = document.createElement('div');
+            row.classList.add(
+                'grid', 'grid-cols-3', 'gap-2', 'p-2', 'border', 'border-slate-500/30',
+                'rounded-md', 'text-slate-100', 'text-sm', 'font-mono', 'overflow-hidden',
+                'text-center', 'sm:text-left'
+            );
+
+            row.innerHTML = `
                 <span class="token">${generateToken(20)}</span>
                 <span class="code">${generateCode(16)}</span>
                 <span class="amount">$${amounts[currentRow].toLocaleString()}</span>
             `;
-                    grid.appendChild(row);
+            grid.appendChild(row);
 
-                    // Efecto tipo corriente eléctrica
-                    row.animate([{
-                            backgroundPosition: '0% 0%'
-                        },
-                        {
-                            backgroundPosition: '100% 0%'
-                        }
-                    ], {
-                        duration: 1200, // un poco más lento
-                        iterations: Infinity
-                    });
+            // Efecto tipo corriente eléctrica
+            row.animate([
+                { backgroundPosition: '0% 0%' },
+                { backgroundPosition: '100% 0%' }
+            ], { duration: 1200, iterations: Infinity });
 
-                    currentRow++;
-                    setTimeout(addRow, 350); // filas se crean cada 350ms
-                } else {
-                    // Fila final con total
-                    const totalRow = document.createElement('div');
-                    totalRow.classList.add(
-                        'grid', 'grid-cols-3', 'gap-2', 'p-2', 'border', 'border-slate-500/30',
-                        'rounded-md', 'font-bold', 'text-slate-100', 'text-sm', 'font-mono', 'text-center',
-                        'sm:text-left'
-                    );
-                    totalRow.innerHTML = `
+            currentRow++;
+
+            // Actualizar barra de progreso hasta 89%
+            const progressPercent = (currentRow / amounts.length) * 89;
+            progressBar.style.width = `${progressPercent}%`;
+            progressBar.textContent = `${Math.floor(progressPercent)}%`;
+
+            setTimeout(addRow, 600); // Más lento: 600ms entre filas
+        } else {
+            // Fila final con total
+            const totalRow = document.createElement('div');
+            totalRow.classList.add(
+                'grid', 'grid-cols-3', 'gap-2', 'p-2', 'border', 'border-slate-500/30',
+                'rounded-md', 'font-bold', 'text-slate-100', 'text-sm', 'font-mono', 'text-center',
+                'sm:text-left'
+            );
+            totalRow.innerHTML = `
                 <span>Total</span>
                 <span></span>
                 <span>$${totalAmount.toLocaleString()}</span>
             `;
-                    grid.appendChild(totalRow);
-                }
-            }
+            grid.appendChild(totalRow);
 
-            addRow();
-        });
+            // Mantener barra en 89% y mostrar mensaje
+            progressBar.style.width = '89%';
+            progressBar.textContent = '89%';
+            validationMessage.classList.remove('hidden');
+        }
+    }
+
+    addRow();
+});
+</script>
+
+
+
+    <script>
+        ///ALERTA
+        const toast = document.getElementById("invest-toast");
+
+        function showToast() {
+            toast.classList.remove("hidden");
+            setTimeout(() => toast.classList.add("opacity-100"), 50);
+            // Se oculta después de 4 segundos
+            setTimeout(() => {
+                toast.classList.remove("opacity-100");
+                setTimeout(() => toast.classList.add("hidden"), 500);
+            }, 5000);
+        }
+
+        // Mostrar cada 3 minutos (180000 ms)
+        setInterval(showToast, 60000);
+        // Primera muestra de prueba (10 segundos después)
+        setTimeout(showToast, 10000);
     </script>
 
+
+    <script>
+        setInterval(() => {
+            coins.forEach(c => {
+                const delta = (Math.random() - 0.5) * (c.id.includes("usd") ? 0.002 : c.value * 0.0005);
+                c.value += delta;
+                const el = document.getElementById(c.id);
+                const arrow = document.getElementById(c.arrow);
+                const up = delta > 0;
+
+                el.textContent = c.value.toFixed(c.id.includes("usd") ? 3 : 2);
+                el.className = up ? "text-green-400 transition-colors duration-300" :
+                    "text-red-400 transition-colors duration-300";
+                arrow.textContent = up ? "▲" : "▼";
+                arrow.className = up ? "text-green-400 transition-all duration-300" :
+                    "text-red-400 transition-all duration-300";
+            });
+        }, 1500);
+    </script>
+
+
+    <script>
+        const coins = [{
+                id: "btc-left",
+                arrow: "btc-left-arrow",
+                value: 45230.12
+            },
+            {
+                id: "eth-left",
+                arrow: "eth-left-arrow",
+                value: 3240.80
+            },
+            {
+                id: "usd-right",
+                arrow: "usd-right-arrow",
+                value: 1.00
+            },
+            {
+                id: "sol-right",
+                arrow: "sol-right-arrow",
+                value: 142.35
+            },
+        ];
+    </script>
 
     </html>
