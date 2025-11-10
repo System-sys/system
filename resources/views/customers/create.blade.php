@@ -45,13 +45,31 @@
                         class="mt-1 w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
                         required>
                 </div>
-
+   
                 <div class="w-full">
                     <label for="phone"
-                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">#Cuenta</label>
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">Teléfono</label>
                     <input type="text" name="phone" id="phone" value="{{ old('phone') }}"
                         class="mt-1 w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                 </div>
+
+
+                    <div class="w-full">
+                    <label for="account" class="block text-sm font-medium text-gray-700 dark:text-gray-300">#Cuenta</label>
+                    <input type="text" name="account" id="account" value="{{ old('account') }}"
+                        class="mt-1 w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                        required>
+                </div>
+
+
+
+                {{-- <div class="w-full">
+                    <label for="bank_account"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">#Cuenta</label>
+                    <input type="text" name="bank_account" id="bank_account" value="{{ old('bank_account') }}"
+                        class="mt-1 w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                        autocomplete="off">
+                </div> --}}
 
                 <div class="w-full flex justify-center">
                     <div class="w-1/2">

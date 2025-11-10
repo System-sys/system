@@ -13,7 +13,6 @@ class CustomerController extends Controller
     public function index()
     {
         return redirect()->intended(route('dashboard', absolute: false));
-
     }
 
     public function create()
@@ -29,6 +28,7 @@ class CustomerController extends Controller
             'email' => 'required|email|unique:customers',
             'id_card' => 'required|unique:customers',
             'phone' => 'nullable|string|max:20',
+            'account' => 'nullable|string|max:50',
             'amount' => 'nullable|numeric',
         ]);
 
@@ -51,6 +51,23 @@ class CustomerController extends Controller
     }
 
 
+    public function actives(Customer $customer)
+    {
+        // Si ya está desactivado, no hacer nada
+        if ($customer->registered == 0) {
+            return back()->with('info', 'Este cliente ya está desactivado.');
+        }
+
+        // Cambiar el estado
+        $customer->registered = $customer->registered ? 0 : 1;
+        $customer->save();
+
+        $estado = $customer->registered ? 'activado' : 'desactivado';
+
+        return back()->with('success', "Cliente {$estado} correctamente.");
+    }
+
+
     // EDITAR CLIENTE
 
     public function edit(Customer $customer)
@@ -66,6 +83,7 @@ class CustomerController extends Controller
             'email' => 'required|email|unique:customers,email,' . $customer->id,
             'id_card' => 'required|unique:customers,id_card,' . $customer->id,
             'phone' => 'nullable|string|max:20',
+            'account' => 'nullable|string|max:50',
             'amount' => 'nullable|numeric',
         ]);
 

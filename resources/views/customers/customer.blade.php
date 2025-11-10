@@ -20,6 +20,7 @@
                     <tr class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
                         <th class="px-6 py-3 text-sm font-semibold uppercase">Nombre</th>
                         <th class="px-6 py-3 text-sm font-semibold uppercase">Email</th>
+                        <th class="px-6 py-3 text-sm font-semibold uppercase">Tel</th>
                         <th class="px-6 py-3 text-sm font-semibold uppercase">#Cuenta</th>
                         <th class="px-6 py-3 text-sm font-semibold uppercase">Monto</th>
                         <th class="px-6 py-3 text-sm font-semibold uppercase">Acciones</th>
@@ -31,9 +32,12 @@
                             <td class="px-6 py-3">{{ $customer->first_name }} {{ $customer->last_name }}</td>
                             <td class="px-6 py-3">{{ $customer->email }}</td>
                             <td class="px-6 py-3">{{ $customer->phone }}</td>
+                            <td class="px-6 py-3">{{ $customer->account }}</td>
                             <td class="px-6 py-3">${{ number_format($customer->amount, 2) }}</td>
+
                             <td class="px-6 py-3">
                                 <div class="flex justify-center" style="gap:2px;">
+
                                     <!-- Botón ver -->
                                     <a href="{{ route('customers.showCode', $customer->id) }}"
                                         style="width:40px; height:40px;"
@@ -48,13 +52,13 @@
 
                                     <!-- Botón editar -->
                                     <a href="{{ route('customers.edit', $customer) }}" style="width:40px; height:40px;"
-                                    class="flex items-center justify-center w-10 h-10 
+                                        class="flex items-center justify-center w-10 h-10 
                                          rounded-full shadow-md border 
                                          bg-white dark:bg-gray-800
                                          border-red-200 dark:border-red-700
                                          hover:text-red-800 dark:hover:text-red-400
                                          transition duration-200">
-                                       
+
                                         <i class="fa-solid fa-pen-to-square text-blue-500"></i>
                                     </a>
 
@@ -71,7 +75,7 @@
           hover:text-red-800 dark:hover:text-red-400
           transition duration-200"
                                                 style="width:40px; height:40px;">
-                                                
+
                                                 <i class="fa-solid fa-trash" style="color: #e91111;"></i>
                                             </button>
                                         </form>
@@ -100,6 +104,27 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Botón activar/desactivar -->
+                                    <form action="{{ route('customers.actives', $customer->id) }}" method="POST"
+                                        style="margin:0;">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit"
+                                            class="flex items-center justify-center w-10 h-10 
+               rounded-full shadow-md border 
+               bg-white dark:bg-gray-800
+               border-red-200 dark:border-red-700
+               hover:text-green-600 dark:hover:text-green-400
+               transition duration-200"
+                                            title="{{ $customer->registered ? 'Desactivar cliente' : 'Activar cliente' }}">
+                                            @if ($customer->registered)
+                                                <i class="fa-solid fa-toggle-on" style="color: #10b981;"></i>
+                                            @else
+                                                <i class="fa-solid fa-toggle-off" style="color: #6b7280;"></i>
+                                            @endif
+                                        </button>
+                                    </form>
                                 </div>
         </div>
     </div>

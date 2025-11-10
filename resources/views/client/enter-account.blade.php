@@ -96,12 +96,12 @@
             <!-- Sección Izquierda (Monedas) -->
             <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
                 <div class="flex items-center gap-2">
-                    <img src="/bitcoin.png" alt="BTC" alt="BTC" class="w-5 h-5 sm:w-6 sm:h-6">
+                    <img src="/public/bitcoin.png" alt="BTC" alt="BTC" class="w-5 h-5 sm:w-6 sm:h-6">
                     <span>BTC: <span id="btc-left" class="text-green-400">45,230.12</span></span>
                     <span id="btc-left-arrow" class="text-green-400 font-semibold">▲</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <img src="/etereo.png" alt="ETH" class="w-5 h-5 sm:w-6 sm:h-6">
+                    <img src="/public/etereo.png" alt="ETH" class="w-5 h-5 sm:w-6 sm:h-6">
                     <span>ETH: <span id="eth-left" class="text-red-400">3,240.80</span></span>
                     <span id="eth-left-arrow" class="text-red-400 font-semibold">▼</span>
                 </div>
@@ -115,15 +115,15 @@
             <!-- Sección Derecha (Monedas) -->
             <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
                 <div class="flex items-center gap-2">
-                    <img src="/usd.png" alt="USD" class="w-5 h-5 sm:w-6 sm:h-6">
+                    <img src="/public/usd.png" alt="USD" class="w-5 h-5 sm:w-6 sm:h-6">
                     <span>USD: <span id="usd-right" class="text-green-400">1.00</span></span>
                     <span id="usd-right-arrow" class="text-green-400 font-semibold">▲</span>
                 </div>
-                <div class="flex items-center gap-2">
-                    <img src="/BINANCE.png" alt="SOL" class="w-5 h-5 sm:w-6 sm:h-6">
-                    <span>BIN: <span id="sol-right" class="text-red-400">142.35</span></span>
-                    <span id="sol-right-arrow" class="text-red-400 font-semibold">▼</span>
-                </div>
+                 <div class="flex items-center gap-2">
+                        <img src="/binsss.png" alt="SOL" class="w-5 h-5 sm:w-6 sm:h-6">
+                        <span>BIN: <span id="sol-right" class="text-red-400">142.35</span></span>
+                        <span id="sol-right-arrow" class="text-red-400 font-semibold">▼</span>
+                    </div>
             </div>
         </div>
     </footer>
