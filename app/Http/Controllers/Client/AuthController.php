@@ -36,8 +36,8 @@ class AuthController extends Controller
         session(['client_id' => $customer->id]);
 
         if ($request->ajax()) {
-            // Si no tiene cuenta, redirigir al form de cuenta
-            $redirect = $customer->account
+            // Si registered = 1, redirigir al home; si = 0, al formulario de cuenta
+            $redirect = $customer->registered
                 ? route('client.home')
                 : route('client.enterAccount');
 
@@ -47,10 +47,11 @@ class AuthController extends Controller
             ]);
         }
 
-        return $customer->account
+        return $customer->registered
             ? redirect()->route('client.home')
             : redirect()->route('client.enterAccount');
     }
+
 
     public function showAccountForm()
     {
@@ -61,8 +62,8 @@ class AuthController extends Controller
 
         $customer = Customer::find(session('client_id'));
 
-        // Si ya tiene cuenta registrada, ir directo al home
-        if ($customer && $customer->account) {
+        // Si ya está registrado (campo registered = 1), ir directo al home
+        if ($customer && $customer->registered) {
             return redirect()->route('client.home');
         }
 
@@ -87,7 +88,7 @@ class AuthController extends Controller
         }
 
         // Validar que coincida con el teléfono
-        if ($request->account !== $customer->phone) {
+        if ($request->account !== $customer->account) {
             return back()
                 ->withErrors(['account' => 'The account number is incorrect, please try again.'])
                 ->withInput();
@@ -147,6 +148,21 @@ class AuthController extends Controller
         // Redirigir al formulario de ingreso de código
         return redirect()->route('client.enterCode');
     }
+
+
+    public function logouts(Request $request)
+    {
+        // Limpiar la sesión del cliente
+        $request->session()->forget('client_id');
+
+        // Opcional: destruir toda la sesión si quieres
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // Redirigir al formulario de ingreso de código
+        return redirect()->route('login');
+    }
+
 
     // Home del cliente
     public function home()

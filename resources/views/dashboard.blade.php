@@ -1,13 +1,15 @@
 
 <x-app-layout>
-<div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+<div class="py-12"> 
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 flex items-center justify-between text-gray-900 dark:text-gray-100">
-                <span>{{ __("¡Has iniciado sesión!") }}</span>
+            <div class="p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between text-gray-900 dark:text-gray-100 space-y-4 sm:space-y-0">
+                <span class="text-center sm:text-left text-lg sm:text-base font-medium">
+                    {{ __("¡Has iniciado sesión!") }}
+                </span>
 
                 <a href="{{ route('admin.register') }}"
-                    class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow-sm transition duration-200">
+                    class="inline-flex justify-center sm:justify-start items-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow-sm transition duration-200 w-full sm:w-auto">
                     Crear Usuario
                 </a>
             </div>

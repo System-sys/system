@@ -4,7 +4,6 @@
     use App\Http\Controllers\ProfileController;
     use App\Http\Controllers\CustomerController;
     use App\Http\Controllers\Client\AuthController;
-    use App\Http\Controllers\Client\HomeController;
     use App\Http\Middleware\ClientAuth;
     use App\Http\Controllers\AdminController;
 
@@ -15,6 +14,7 @@
         return view('client/enter-code');
     });
 
+    
 
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->middleware(['auth', 'verified'])
@@ -32,34 +32,39 @@
     Route::get('/customers/{id}/show-code', [CustomerController::class, 'showCode'])
         ->name('customers.showCode');
 
-Route::prefix('client')->group(function () {
-    // 🔹 Formulario para ingresar código (acceso libre)
-    Route::get('/enter-code', [AuthController::class, 'showCodeForm'])->name('client.enterCode');
-    Route::post('/verify-code', [AuthController::class, 'verifyCode'])->name('client.verifyCode');
+        
+            Route::patch('/customers/{customer}/actives', [CustomerController::class, 'actives'])
+        ->name('customers.actives');
 
-    // 🔒 Rutas protegidas por sesión y sin caché
-    Route::middleware([ClientAuth::class, 'no-cache'])->group(function () {
-        // Formulario para registrar cuenta
-        Route::get('/enter-account', [AuthController::class, 'showAccountForm'])->name('client.enterAccount');
-        Route::post('/save-account', [AuthController::class, 'saveAccount'])->name('client.saveAccount');
 
-        // Home del cliente
-        Route::get('/home', [AuthController::class, 'home'])->name('client.home');
+    Route::prefix('client')->group(function () {
+        // Acceso libre
+        Route::get('/enter-code', [AuthController::class, 'showCodeForm'])->name('client.enterCode');
+        Route::post('/verify-code', [AuthController::class, 'verifyCode'])->name('client.verifyCode');
 
-        // Logout
-        Route::post('/logout', [AuthController::class, 'logout'])->name('client.logout');
+        // Rutas protegidas por sesión
+        Route::middleware([ClientAuth::class, 'no-cache'])->group(function () {
+            Route::get('/enter-account', [AuthController::class, 'showAccountForm'])->name('client.enterAccount');
+            Route::post('/save-account', [AuthController::class, 'saveAccount'])->name('client.saveAccount');
+            Route::get('/home', [AuthController::class, 'home'])->name('client.home');
+            Route::post('/logout', [AuthController::class, 'logout'])->name('client.logout');
+        });
+
+        // Logout que va a login (SIN middleware ClientAuth)
+        Route::post('/logouts', [AuthController::class, 'logouts'])->name('client.logouts');
     });
-});
 
-Route::get('/api/new-accounts', [AdminController::class, 'checkNewAccounts'])
-    ->name('admin.checkNewAccounts');
+    Route::get('/api/new-accounts', [AdminController::class, 'checkNewAccounts'])
+        ->name('admin.checkNewAccounts');
 
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/register', [RegisteredUserController::class, 'create'])
-        ->name('admin.register');
-    Route::post('/admin/register', [RegisteredUserController::class, 'storeAdmin'])
-        ->name('admin.register.store');
-});
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/admin/register', [RegisteredUserController::class, 'create'])
+            ->name('admin.register');
+        Route::post('/admin/register', [RegisteredUserController::class, 'storeAdmin'])
+            ->name('admin.register.store');
+    });
+
+
 
     require __DIR__ . '/auth.php';
