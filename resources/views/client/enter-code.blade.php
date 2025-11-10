@@ -16,7 +16,7 @@
 
     <!-- Logo difuminado de fondo -->
     <div id="verify-page" class="absolute inset-0 flex justify-center items-center pointer-events-none">
-        <x-application-logo class="w-[50rem] h-[40rem] opacity-5 text-white" />
+        <x-application-logo class="w-[50rem] h-[40rem] opacity-10 text-white" />
     </div>
 
     <!-- Cuadrícula de fondo con efecto de luz -->
@@ -40,11 +40,11 @@
                 <div
                     class="bg-[#1e2a36]/40 border border-slate-500/30 p-6 sm:p-10 rounded-lg shadow-lg text-center inline-block">
                     <h2 class="text-base sm:text-lg md:text-xl font-medium text-white mb-6 leading-snug">
-                        Unlock your account by entering your unique code
+                        Inicia sesión en tu cuenta e introduce tu código
                     </h2>
 
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-                        <input type="text" name="code" placeholder="Please type the code you received"
+                        <input type="text" name="code" placeholder="Introduzca el código que ha recibido."
                             class="h-11 sm:h-12 w-full sm:min-w-[280px] md:min-w-[360px] px-4 
                    bg-[#1e2a36]/60 border border-slate-500/30
                    focus:border-slate-400/50 focus:outline-none text-white 
@@ -56,7 +56,7 @@
                    bg-slate-700/40 hover:bg-slate-600/50 hover:border-slate-400/50 
                    transition-all duration-300 text-slate-200 hover:text-white 
                    rounded-md text-sm sm:text-base">
-                            Search
+                            Buscar
                         </button>
                     </div>
 
@@ -81,8 +81,8 @@
                     <i class="fa-solid fa-circle-xmark text-6xl animate-bounce"></i>
                 </div>
 
-                <h2 id="loading-text" class="text-xl font-semibold mb-2">Verifying code...</h2>
-                <p id="loading-subtext" class="text-slate-300 text-sm animate-pulse">Validating data, please wait
+                <h2 id="loading-text" class="text-xl font-semibold mb-2">Verificando código...</h2>
+                <p id="loading-subtext" class="text-slate-300 text-sm animate-pulse">Validando datos, por favor espere.
                 </p>
             </div>
         </div>
@@ -140,8 +140,8 @@
         <i class="fa-solid fa-chart-line text-emerald-400 text-lg mt-1"></i>
 
         <div class="flex flex-col leading-tight">
-            <strong class="text-emerald-400 font-semibold">Follow your investments</strong>
-            <span class="text-slate-300">Get updates and insights on your portfolio.</span>
+            <strong class="text-emerald-400 font-semibold">Siga sus inversiones</strong>
+            <span class="text-slate-300">Reciba actualizaciones e información sobre sus movimientos.</span>
         </div>
     </div>
 </body>
@@ -212,8 +212,8 @@
         safeClassRemove(spinner, "hidden");
         safeClassAdd(successIcon, "hidden");
         safeClassAdd(errorIcon, "hidden");
-        safeText(text, "Verifying code...");
-        safeText(subtext, "Validating data, please wait");
+        safeText(text, "Verificando código...");
+        safeText(subtext, "Validando datos, por favor espere.");
 
         const formData = new FormData(form);
 
@@ -234,8 +234,8 @@
                 // Éxito
                 safeClassAdd(spinner, "hidden");
                 safeClassRemove(successIcon, "hidden");
-                safeText(text, "Code verified successfully");
-                safeText(subtext, "Redirecting...");
+                safeText(text, "Código verificado exitosamente");
+                safeText(subtext, "Redireccionando...");
 
                 if (data.redirect) {
                     setTimeout(() => window.location.href = data.redirect, 3000);
@@ -247,8 +247,8 @@
                 safeClassAdd(successIcon, "hidden");
                 safeClassRemove(errorIcon, "hidden");
 
-                safeText(text, "Error verifying code");
-                safeText(subtext, err.message || err?.errors?.code?.[0] || 'Invalid code');
+                safeText(text, "Error al verificar el código");
+                safeText(subtext, err.message || err?.errors?.code?.[0] || 'Código no válido');
 
                 setTimeout(() => {
                     safeClassAdd(overlay, "hidden");
@@ -270,8 +270,8 @@
         // Se oculta después de 4 segundos
         setTimeout(() => {
             toast.classList.remove("opacity-100");
-            setTimeout(() => toast.classList.add("hidden"), 500);
-        }, 5000);
+            setTimeout(() => toast.classList.add("hidden"), 2000);
+        }, 7000);
     }
 
     // Mostrar cada 3 minutos (180000 ms)

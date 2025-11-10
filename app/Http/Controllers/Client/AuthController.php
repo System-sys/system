@@ -26,11 +26,11 @@ class AuthController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Invalid code'
+                    'message' => 'Código no válido'
                 ], 422);
             }
 
-            return back()->withErrors(['code' => 'Invalid code']);
+            return back()->withErrors(['code' => 'Código no válido']);
         }
 
         session(['client_id' => $customer->id]);
@@ -90,7 +90,7 @@ class AuthController extends Controller
         // Validar que coincida con el teléfono
         if ($request->account !== $customer->account) {
             return back()
-                ->withErrors(['account' => 'The account number is incorrect, please try again.'])
+                ->withErrors(['account' => 'El número de cuenta es incorrecto, inténtelo de nuevo.'])
                 ->withInput();
         }
 

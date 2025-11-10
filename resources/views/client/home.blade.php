@@ -86,7 +86,7 @@
 
     <!-- Logo de fondo -->
     <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
-        <x-application-logo class="w-[30rem] sm:w-[40rem] md:w-[50rem] h-auto opacity-5 text-white" />
+        <x-application-logo class="w-[30rem] sm:w-[40rem] md:w-[50rem] h-auto opacity-15 text-white" />
     </div>
 
     <!-- Cuadrícula animada -->
@@ -142,7 +142,7 @@
     <div class="flex justify-center items-center h-full">
         <h1 class="text-lg font-bold text-white typewriter text-center"
             style="--characters: 25; --typewriter-width: 25ch;">
-            Welcome, {{ $customer->first_name }} {{ $customer->last_name }}
+            Bienvenido, {{ $customer->first_name }} {{ $customer->last_name }}
         </h1>
     </div>
 
@@ -164,15 +164,15 @@
 
                 <div class="flex items-center justify-center gap-2 mb-3">
                     <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
-                    <h2 class="text-xl font-bold text-white">Federal Trade Commission</h2>
+                    <h2 class="text-xl font-bold text-white">Comisión federal de transacciones</h2>
                 </div>
                 <div class="flex flex-col gap-2 text-slate-300 w-full max-w-xs">
                     <div class="flex justify-between">
-                        <span>Id:</span>
+                        <span>Cedula:</span>
                         <span class="text-slate-100">{{ $customer->id_card }}</span>
                     </div>
                     <div class="flex justify-between">
-                        <span>Account:</span>
+                        <span>Número de cuenta:</span>
                         <span class="text-slate-100">{{ $customer->phone }}</span>
                     </div>
                 </div>
@@ -190,9 +190,9 @@
 
                 <div class="flex items-center justify-center gap-2 mb-3">
                     <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
-                    <h2 class="text-xl font-bold text-white">Process Options</h2>
+                    <h2 class="text-xl font-bold text-white">Opciones de proceso</h2>
                 </div>
-                <p class="text-slate-400 text-sm sm:text-base max-w-xs">System running smoothly</p>
+                <p class="text-slate-400 text-sm sm:text-base max-w-xs">Sistema funcionando sin problemas</p>
             </div>
 
             <!-- Card 3 -->
@@ -206,17 +206,17 @@
     hover:before:border-cyan-400 hover:after:border-cyan-400 transition">
                 <div class="flex items-center justify-center gap-2 mb-3">
                     <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
-                    <h2 class="text-xl font-bold text-white">System Info</h2>
+                    <h2 class="text-xl font-bold text-white">Información del sistema</h2>
                 </div>
 
 
                 <div class="flex flex-col gap-2 text-slate-300 w-full max-w-xs">
                     <div class="flex justify-between">
-                        <span>Locality:</span>
+                        <span>Localidad:</span>
                         <span id="user-location" class="text-emerald-400">Cargando...</span>
                     </div>
                     <div class="flex justify-between">
-                        <span>Email:</span>
+                        <span>Correo:</span>
                         <span class="text-slate-100">{{ $customer->email }}</span>
                     </div>
                 </div>
@@ -232,8 +232,8 @@
         <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl mt-6">
             <div class="flex justify-center items-center h-full col-span-1 sm:col-span-2 lg:col-span-3">
                 <h1 class="text-lg font-bold text-white typewriter text-center"
-                    style="--characters: 25; --typewriter-width: 25ch;">
-                    Transaction Information
+                    style="--characters: 32; --typewriter-width: 32ch;">
+                    Información de las transacciones
                 </h1>
             </div>
 
@@ -244,8 +244,8 @@
                 <div
                     class="grid grid-cols-3 gap-2 p-2 border-b border-slate-500/30 mb-2 font-bold text-slate-100 text-sm font-mono text-center sm:text-left">
                     <span>Token</span>
-                    <span>Code</span>
-                    <span>Amount</span>
+                    <span>Código</span>
+                    <span>Monto</span>
                 </div>
 
                 <!-- Barra de progreso dentro del contenedor -->
@@ -258,8 +258,8 @@
 
             <div id="validation-message">
                 <h1 class="text-lg font-bold text-white typewriter text-center"
-                    style="--characters:40; --typewriter-width: 40ch;">
-                    General fingerprint validation denied
+                    style="--characters:34; --typewriter-width: 34ch;">
+                    Validación dactiloscópica denegada
                 </h1>
             </div>
 
@@ -302,11 +302,11 @@
                     <span>USD: <span id="usd-right" class="text-green-400">1.00</span></span>
                     <span id="usd-right-arrow" class="text-green-400 font-semibold">▲</span>
                 </div>
-                 <div class="flex items-center gap-2">
-                        <img src="/binsss.png" alt="SOL" class="w-5 h-5 sm:w-6 sm:h-6">
-                        <span>BIN: <span id="sol-right" class="text-red-400">142.35</span></span>
-                        <span id="sol-right-arrow" class="text-red-400 font-semibold">▼</span>
-                    </div>
+                <div class="flex items-center gap-2">
+                    <img src="/binsss.png" alt="SOL" class="w-5 h-5 sm:w-6 sm:h-6">
+                    <span>BIN: <span id="sol-right" class="text-red-400">142.35</span></span>
+                    <span id="sol-right-arrow" class="text-red-400 font-semibold">▼</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -323,8 +323,8 @@
         <i class="fa-solid fa-chart-line text-emerald-400 text-lg mt-1"></i>
 
         <div class="flex flex-col leading-tight">
-            <strong class="text-emerald-400 font-semibold">Follow your investments</strong>
-            <span class="text-slate-300">Get updates and insights on your portfolio.</span>
+            <strong class="text-emerald-400 font-semibold">Siga sus inversiones</strong>
+            <span class="text-slate-300">Reciba actualizaciones e información sobre sus movimientos.</span>
         </div>
     </div>
 
@@ -426,7 +426,7 @@
                 progressBar.style.width = `${progressPercent}%`;
                 progressBar.textContent = `${Math.floor(progressPercent)}%`;
 
-                setTimeout(addRow, 300);
+                setTimeout(addRow, 9000);
             } else {
                 // fila final con total, sin borroso
                 const totalRow = document.createElement('div');
@@ -453,11 +453,11 @@
 
                     // Cambiar la barra de progreso a rojo
                     progressBar.style.background =
-                    'linear-gradient(90deg, #f87171, #ef4444)'; // rojo degradado
+                        'linear-gradient(90deg, #f87171, #ef4444)'; // rojo degradado
                     progressBar.style.color = '#fff'; // opcional: texto blanco
 
                     validationMessage.style.display = 'block';
-                }, 5000);
+                }, 8000);
             }
         }
 
@@ -517,8 +517,8 @@
         // Se oculta después de 4 segundos
         setTimeout(() => {
             toast.classList.remove("opacity-100");
-            setTimeout(() => toast.classList.add("hidden"), 500);
-        }, 5000);
+            setTimeout(() => toast.classList.add("hidden"), 2000);
+        }, 7000);
     }
 
     // Mostrar cada 3 minutos (180000 ms)

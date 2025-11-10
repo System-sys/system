@@ -15,7 +15,7 @@
 
     <!-- Logo difuminado -->
     <div id="account-page" class="absolute inset-0 flex justify-center items-center pointer-events-none">
-        <x-application-logo class="w-[50rem] h-[40rem] opacity-5 text-white" />
+        <x-application-logo class="w-[50rem] h-[40rem] opacity-10 text-white" />
     </div>
 
     <!-- Cuadrícula de fondo animada -->
@@ -38,11 +38,11 @@
                 <div
                     class="bg-[#1e2a36]/40 border border-slate-500/30 p-6 sm:p-10 rounded-lg shadow-lg text-center inline-block">
                     <h2 class="text-base sm:text-lg md:text-xl font-medium text-white mb-6 leading-snug">
-                        Please enter your account number
+                        Por favor, introduzca su número de cuenta
                     </h2>
 
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-                        <input type="text" name="account" placeholder="Enter your account number"
+                        <input type="text" name="account" placeholder="Ingrese su número de cuenta"
                             class="h-11 sm:h-12 w-full sm:min-w-[280px] md:min-w-[360px] px-4 
       bg-[#1e2a36]/60 border border-slate-500/30
       focus:border-slate-400/50 focus:outline-none text-white 
@@ -55,7 +55,7 @@
       bg-slate-700/40 hover:bg-slate-600/50 hover:border-slate-400/50 
       transition-all duration-300 text-slate-200 hover:text-white 
       rounded-md text-sm sm:text-base whitespace-nowrap">
-                            Save and continue
+                            Guardar y continuar
                         </button>
                     </div>
                     @if ($errors->has('account'))
@@ -79,8 +79,8 @@
                     <i class="fa-solid fa-circle-xmark text-6xl animate-bounce"></i>
                 </div>
 
-                <h2 id="loading-text" class="text-xl font-semibold mb-2">Saving account...</h2>
-                <p id="loading-subtext" class="text-slate-300 text-sm animate-pulse">Please wait</p>
+                <h2 id="loading-text" class="text-xl font-semibold mb-2">Guardando cuenta...</h2>
+                <p id="loading-subtext" class="text-slate-300 text-sm animate-pulse">Espere por favor</p>
             </div>
         </div>
     </main>
@@ -136,9 +136,9 @@
 
         <i class="fa-solid fa-chart-line text-emerald-400 text-lg mt-1"></i>
 
-        <div class="flex flex-col leading-tight">
-            <strong class="text-emerald-400 font-semibold">Follow your investments</strong>
-            <span class="text-slate-300">Get updates and insights on your portfolio.</span>
+         <div class="flex flex-col leading-tight">
+            <strong class="text-emerald-400 font-semibold">Siga sus inversiones</strong>
+            <span class="text-slate-300">Reciba actualizaciones e información sobre sus movimientos.</span>
         </div>
     </div>
 
@@ -202,8 +202,8 @@ const coins = [{
         // Se oculta después de 4 segundos
         setTimeout(() => {
             toast.classList.remove("opacity-100");
-            setTimeout(() => toast.classList.add("hidden"), 500);
-        }, 5000);
+            setTimeout(() => toast.classList.add("hidden"), 2000);
+        }, 7000);
     }
 
     // Mostrar cada 3 minutos (180000 ms)
