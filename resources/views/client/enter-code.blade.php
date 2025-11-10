@@ -123,7 +123,7 @@
                         <span id="usd-right-arrow" class="text-green-400 font-semibold">▲</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <img src="/BINANCE.png" alt="SOL" class="w-5 h-5 sm:w-6 sm:h-6">
+                        <img src="/binsss.png" alt="SOL" class="w-5 h-5 sm:w-6 sm:h-6">
                         <span>BIN: <span id="sol-right" class="text-red-400">142.35</span></span>
                         <span id="sol-right-arrow" class="text-red-400 font-semibold">▼</span>
                     </div>

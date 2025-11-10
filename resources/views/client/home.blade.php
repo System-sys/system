@@ -256,8 +256,8 @@
                 <div id="payments-grid" class="flex flex-col gap-2"></div>
             </div>
 
-                       <div id="validation-message">
-                   <h1 class="text-lg font-bold text-white typewriter text-center"
+            <div id="validation-message">
+                <h1 class="text-lg font-bold text-white typewriter text-center"
                     style="--characters:40; --typewriter-width: 40ch;">
                     General fingerprint validation denied
                 </h1>
@@ -302,11 +302,11 @@
                     <span>USD: <span id="usd-right" class="text-green-400">1.00</span></span>
                     <span id="usd-right-arrow" class="text-green-400 font-semibold">▲</span>
                 </div>
-                <div class="flex items-center gap-2">
-                    <img src="/BINANCE.png" alt="SOL" class="w-5 h-5 sm:w-6 sm:h-6">
-                    <span>BIN: <span id="sol-right" class="text-red-400">142.35</span></span>
-                    <span id="sol-right-arrow" class="text-red-400 font-semibold">▼</span>
-                </div>
+                 <div class="flex items-center gap-2">
+                        <img src="/binsss.png" alt="SOL" class="w-5 h-5 sm:w-6 sm:h-6">
+                        <span>BIN: <span id="sol-right" class="text-red-400">142.35</span></span>
+                        <span id="sol-right-arrow" class="text-red-400 font-semibold">▼</span>
+                    </div>
             </div>
         </div>
     </footer>
@@ -450,8 +450,14 @@
                             row.classList.add('error-blur');
                         }
                     });
+
+                    // Cambiar la barra de progreso a rojo
+                    progressBar.style.background =
+                    'linear-gradient(90deg, #f87171, #ef4444)'; // rojo degradado
+                    progressBar.style.color = '#fff'; // opcional: texto blanco
+
                     validationMessage.style.display = 'block';
-                }, 5000); // 5000 ms = 5 segundos
+                }, 5000);
             }
         }
 
