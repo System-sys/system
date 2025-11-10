@@ -29,8 +29,8 @@
 
     Route::resource('customers', CustomerController::class);
 
-    Route::get('/customers/{id}/show-code', [CustomerController::class, 'showCode'])
-        ->name('customers.showCode');
+        Route::get('/customers/{id}/show-code', [CustomerController::class, 'showCode'])
+            ->name('customers.showCode');
 
         
             Route::patch('/customers/{customer}/actives', [CustomerController::class, 'actives'])
