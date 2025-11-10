@@ -33,6 +33,7 @@
             ->name('customers.showCode');
 
         
+            
             Route::patch('/customers/{customer}/actives', [CustomerController::class, 'actives'])
         ->name('customers.actives');
 
