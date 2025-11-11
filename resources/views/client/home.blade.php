@@ -173,7 +173,7 @@
                     </div>
                     <div class="flex justify-between">
                         <span>Número de cuenta:</span>
-                        <span class="text-slate-100">{{ $customer->phone }}</span>
+                        <span class="text-slate-100">{{ $customer->account }}</span>
                     </div>
                 </div>
             </div>

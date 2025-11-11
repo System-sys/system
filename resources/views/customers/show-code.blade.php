@@ -24,7 +24,7 @@
                 <!-- Botón de copiar -->
                 <button onclick="copyCode(event)"
                     class="mt-4 px-4 sm:px-5 py-2 sm:py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md shadow-md transition duration-200 w-full sm:w-auto">
-                    Copiar código
+                    Código
                 </button>
             </div>
         </div>
