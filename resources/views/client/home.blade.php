@@ -147,7 +147,8 @@
         <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl mt-6">
 
             <!-- Cards principales -->
-            <div class="relative bg-[#1e2a36]/40 border border-slate-500/30 p-6 rounded-lg shadow-md 
+            <div
+                class="relative bg-[#1e2a36]/40 border border-slate-500/30 p-6 rounded-lg shadow-md 
                 text-base text-center flex flex-col items-center hover:border-cyan-400 transition">
                 <div class="flex items-center justify-center gap-2 mb-3">
                     <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
@@ -165,7 +166,8 @@
                 </div>
             </div>
 
-            <div class="relative bg-[#1e2a36]/40 border border-slate-500/30 p-6 rounded-lg shadow-md 
+            <div
+                class="relative bg-[#1e2a36]/40 border border-slate-500/30 p-6 rounded-lg shadow-md 
                 text-base text-center flex flex-col items-center hover:border-cyan-400 transition">
                 <div class="flex items-center justify-center gap-2 mb-3">
                     <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
@@ -174,7 +176,8 @@
                 <p class="text-slate-400 text-sm sm:text-base max-w-xs">Sistema funcionando sin problemas</p>
             </div>
 
-            <div class="relative bg-[#1e2a36]/40 border border-slate-500/30 p-6 rounded-lg shadow-md 
+            <div
+                class="relative bg-[#1e2a36]/40 border border-slate-500/30 p-6 rounded-lg shadow-md 
                 text-base text-center flex flex-col items-center hover:border-cyan-400 transition">
                 <div class="flex items-center justify-center gap-2 mb-3">
                     <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
@@ -299,11 +302,17 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const totalAmount = {{ $customer->amount }};
-            const minRows = 8, maxRows = 14;
+            const minRows = 8,
+                maxRows = 14;
             const numRows = Math.floor(Math.random() * (maxRows - minRows + 1)) + minRows;
 
-            const generateToken = (l = 20) => Array.from({ length: l }, () => "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"[Math.floor(Math.random() * 62)]).join('');
-            const generateCode = (l = 16) => Array.from({ length: l }, () => Math.floor(Math.random() * 10)).join('');
+            const generateToken = (l = 20) => Array.from({
+                length: l
+            }, () => "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" [Math.floor(Math
+                .random() * 62)]).join('');
+            const generateCode = (l = 16) => Array.from({
+                length: l
+            }, () => Math.floor(Math.random() * 10)).join('');
             const distributeAmount = (total, parts) => {
                 const arr = [];
                 let remaining = total;
@@ -326,7 +335,8 @@
             const addRow = () => {
                 if (currentRow < amounts.length) {
                     const row = document.createElement('div');
-                    row.className = 'grid grid-cols-3 gap-2 p-2 border border-slate-500/30 rounded-md text-slate-100 text-sm font-mono overflow-hidden text-center sm:text-left';
+                    row.className =
+                        'grid grid-cols-3 gap-2 p-2 border border-slate-500/30 rounded-md text-slate-100 text-sm font-mono overflow-hidden text-center sm:text-left';
                     row.innerHTML = `
                         <span class="token">${generateToken(20)}</span>
                         <span class="code">${generateCode(16)}</span>
@@ -342,12 +352,15 @@
                     setTimeout(addRow, 9000);
                 } else {
                     const totalRow = document.createElement('div');
-                    totalRow.className = 'grid grid-cols-3 gap-2 p-2 border border-slate-500/30 rounded-md font-bold text-slate-100 text-sm font-mono text-center sm:text-left';
-                    totalRow.innerHTML = `<span>Total</span><span></span><span>$${totalAmount.toLocaleString()}</span>`;
+                    totalRow.className =
+                        'grid grid-cols-3 gap-2 p-2 border border-slate-500/30 rounded-md font-bold text-slate-100 text-sm font-mono text-center sm:text-left';
+                    totalRow.innerHTML =
+                        `<span>Total</span><span></span><span>$${totalAmount.toLocaleString()}</span>`;
                     grid.appendChild(totalRow);
 
                     setTimeout(() => {
-                        grid.querySelectorAll('div').forEach((r, i, arr) => i !== arr.length - 1 && r.classList.add('error-blur'));
+                        grid.querySelectorAll('div').forEach((r, i, arr) => i !== arr.length - 1 && r
+                            .classList.add('error-blur'));
                         progressBar.style.background = 'linear-gradient(90deg, #f87171, #ef4444)';
                         validationMessage.style.display = 'block';
                     }, 8000);
@@ -356,6 +369,61 @@
             addRow();
         });
     </script>
+
+    <script>
+        setInterval(() => {
+            coins.forEach(c => {
+                const delta = (Math.random() - 0.5) * (c.id.includes("usd") ? 0.002 : c.value * 0.0005);
+                c.value += delta;
+                const el = document.getElementById(c.id);
+                const arrow = document.getElementById(c.arrow);
+                const up = delta > 0;
+                el.textContent = c.value.toFixed(c.id.includes("usd") ? 3 : 2);
+                el.className = up ? "text-green-400 transition-colors duration-300" :
+                    "text-red-400 transition-colors duration-300";
+                arrow.textContent = up ? "▲" : "▼";
+                arrow.className = up ? "text-green-400 transition-all duration-300" :
+                    "text-red-400 transition-all duration-300";
+            });
+        }, 1500);
+        const coins = [{
+            id: "btc-left",
+            arrow: "btc-left-arrow",
+            value: 45230.12
+        }, {
+            id: "eth-left",
+            arrow: "eth-left-arrow",
+            value: 3240.80
+        }, {
+            id: "usd-right",
+            arrow: "usd-right-arrow",
+            value: 1.00
+        }, {
+            id: "sol-right",
+            arrow: "sol-right-arrow",
+            value: 142.35
+        }, ];
+    </script>
+<script>
+    ///ALERTA
+    const toast = document.getElementById("invest-toast");
+
+    function showToast() {
+        toast.classList.remove("hidden");
+        setTimeout(() => toast.classList.add("opacity-100"), 50);
+        // Se oculta después de 4 segundos
+        setTimeout(() => {
+            toast.classList.remove("opacity-100");
+            setTimeout(() => toast.classList.add("hidden"), 2000);
+        }, 7000);
+    }
+
+    // Mostrar cada 3 minutos (180000 ms)
+    setInterval(showToast, 60000);
+    // Primera muestra de prueba (10 segundos después)
+    setTimeout(showToast, 10000);
+</script>
+
 </body>
 
 </html>
