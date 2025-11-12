@@ -11,12 +11,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
     <style>
-        /* Efecto “corriente eléctrica” en las filas */
+        /* 🔋 Efecto corriente eléctrica animado */
+        @keyframes corriente {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
         #payments-grid div {
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.05) 75%);
+            background: linear-gradient(90deg,
+                    rgba(255, 255, 255, 0.05) 25%,
+                    rgba(255, 255, 255, 0.15) 50%,
+                    rgba(255, 255, 255, 0.05) 75%);
             background-size: 200% 100%;
+            animation: corriente 2.5s linear infinite;
         }
 
         .token,
@@ -24,9 +37,7 @@
             letter-spacing: 0.05em;
             word-break: break-all;
         }
-    </style>
 
-    <style>
         #progress-container {
             width: 100%;
             background-color: #333;
@@ -48,7 +59,6 @@
             transition: width 0.5s ease;
         }
 
-        /* Estado de error: semi-transparente y borroso */
         .error-blur {
             opacity: 0.4;
             filter: blur(4px);
@@ -72,19 +82,12 @@
             font-size: 1.2rem;
         }
     </style>
-
-
-
-
-
-
-
 </head>
 
 <body id="verify-home"
     class="min-h-screen bg-gradient-to-b from-slate-600 via-slate-800 to-[#1e2a36] text-slate-100 flex flex-col relative overflow-x-hidden">
 
-    <!-- Logo de fondo -->
+    <!-- Fondo decorativo -->
     <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
         <x-application-logo class="w-[30rem] sm:w-[40rem] md:w-[50rem] h-auto opacity-15 text-white" />
     </div>
@@ -101,12 +104,8 @@
         </div>
     </div>
 
-
     <nav class="relative z-20 w-full bg-[#1e2a36]/60 border-b border-slate-500/30 backdrop-blur-sm">
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-
-
-
             <h1 class="text-lg sm:text-xl font-bold text-sky-400">CAPITAL RECOVERY</h1>
 
             <!-- Botón móvil -->
@@ -137,31 +136,19 @@
         </ul>
     </nav>
 
-
-    <br>
-    <div class="flex justify-center items-center h-full">
+    <div class="flex justify-center items-center h-full mt-8">
         <h1 class="text-lg font-bold text-white typewriter text-center"
             style="--characters: 25; --typewriter-width: 25ch;">
             Bienvenido, {{ $customer->first_name }} {{ $customer->last_name }}
         </h1>
     </div>
 
-
-
     <main class="relative z-10 flex flex-col items-center flex-1 px-4 sm:px-6 py-8 w-full mt-4">
-        <!-- Dentro de tu <main> -->
         <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl mt-6">
 
-            <!-- Card 1 -->
-            <div
-                class="relative bg-[#1e2a36]/40 border border-slate-500/30 p-6 rounded-lg shadow-md 
-    text-base text-center flex flex-col items-center 
-    before:content-[''] before:absolute before:top-0 before:left-0 before:w-5 before:h-5 
-    before:border-t-2 before:border-l-2 before:border-emerald-400 
-    after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-5 after:h-5 
-    after:border-b-2 after:border-r-2 after:border-emerald-400 
-    hover:before:border-cyan-400 hover:after:border-cyan-400 transition">
-
+            <!-- Cards principales -->
+            <div class="relative bg-[#1e2a36]/40 border border-slate-500/30 p-6 rounded-lg shadow-md 
+                text-base text-center flex flex-col items-center hover:border-cyan-400 transition">
                 <div class="flex items-center justify-center gap-2 mb-3">
                     <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
                     <h2 class="text-xl font-bold text-white">Comisión federal de transacciones</h2>
@@ -178,16 +165,8 @@
                 </div>
             </div>
 
-            <!-- Card 2 -->
-            <div
-                class="relative bg-[#1e2a36]/40 border border-slate-500/30 p-6 rounded-lg shadow-md 
-    text-base text-center flex flex-col items-center 
-    before:content-[''] before:absolute before:top-0 before:left-0 before:w-5 before:h-5 
-    before:border-t-2 before:border-l-2 before:border-emerald-400 
-    after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-5 after:h-5 
-    after:border-b-2 after:border-r-2 after:border-emerald-400 
-    hover:before:border-cyan-400 hover:after:border-cyan-400 transition">
-
+            <div class="relative bg-[#1e2a36]/40 border border-slate-500/30 p-6 rounded-lg shadow-md 
+                text-base text-center flex flex-col items-center hover:border-cyan-400 transition">
                 <div class="flex items-center justify-center gap-2 mb-3">
                     <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
                     <h2 class="text-xl font-bold text-white">Opciones de proceso</h2>
@@ -195,20 +174,12 @@
                 <p class="text-slate-400 text-sm sm:text-base max-w-xs">Sistema funcionando sin problemas</p>
             </div>
 
-            <!-- Card 3 -->
-            <div
-                class="relative bg-[#1e2a36]/40 border border-slate-500/30 p-6 rounded-lg shadow-md 
-    text-base text-center flex flex-col items-center 
-    before:content-[''] before:absolute before:top-0 before:left-0 before:w-5 before:h-5 
-    before:border-t-2 before:border-l-2 before:border-emerald-400 
-    after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-5 after:h-5 
-    after:border-b-2 after:border-r-2 after:border-emerald-400 
-    hover:before:border-cyan-400 hover:after:border-cyan-400 transition">
+            <div class="relative bg-[#1e2a36]/40 border border-slate-500/30 p-6 rounded-lg shadow-md 
+                text-base text-center flex flex-col items-center hover:border-cyan-400 transition">
                 <div class="flex items-center justify-center gap-2 mb-3">
                     <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
                     <h2 class="text-xl font-bold text-white">Información del sistema</h2>
                 </div>
-
 
                 <div class="flex flex-col gap-2 text-slate-300 w-full max-w-xs">
                     <div class="flex justify-between">
@@ -221,16 +192,12 @@
                     </div>
                 </div>
             </div>
-
         </section>
-
-
     </main>
-
 
     <main class="relative z-10 flex flex-col items-center flex-1 px-4 sm:px-6 py-8 w-full mt-4">
         <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl mt-6">
-            <div class="flex justify-center items-center h-full col-span-1 sm:col-span-2 lg:col-span-3">
+            <div class="flex justify-center items-center h-full col-span-3">
                 <h1 class="text-lg font-bold text-white typewriter text-center"
                     style="--characters: 32; --typewriter-width: 32ch;">
                     Información de las transacciones
@@ -238,9 +205,8 @@
             </div>
 
             <div id="payments-container"
-                class="relative bg-[#1e2a36]/40 border border-slate-500/30 p-6 rounded-lg shadow-md text-base text-left w-full col-span-1 sm:col-span-2 lg:col-span-3">
+                class="relative bg-[#1e2a36]/40 border border-slate-500/30 p-6 rounded-lg shadow-md text-base text-left w-full col-span-3">
 
-                <!-- Encabezado -->
                 <div
                     class="grid grid-cols-3 gap-2 p-2 border-b border-slate-500/30 mb-2 font-bold text-slate-100 text-sm font-mono text-center sm:text-left">
                     <span>Token</span>
@@ -248,7 +214,6 @@
                     <span>Monto</span>
                 </div>
 
-                <!-- Barra de progreso dentro del contenedor -->
                 <div id="progress-container" class="bg-slate-700 rounded h-3 mb-4 w-full">
                     <div id="progress-bar" class="bg-emerald-400 h-3 rounded w-0 transition-all duration-300"></div>
                 </div>
@@ -262,24 +227,17 @@
                     Se requiere validación dactiloscópica.
                 </h1>
             </div>
-
         </section>
     </main>
 
-
-
+    <!-- Footer -->
     <footer class="w-full mt-10 sm:mt-16 relative bg-slate-900/30 backdrop-blur-sm border-t border-slate-700/40">
-        <!-- Línea superior decorativa -->
         <div class="h-[1px] bg-gradient-to-r from-transparent via-slate-500/40 to-transparent"></div>
-
-        <!-- Contenedor principal -->
         <div
             class="flex flex-col md:flex-row items-center justify-between gap-4 px-4 sm:px-8 md:px-12 py-6 text-slate-300 text-sm sm:text-base font-medium relative z-10">
-
-            <!-- Sección Izquierda (Monedas) -->
             <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
                 <div class="flex items-center gap-2">
-                    <img src="/bitcoin.png" alt="BTC" alt="BTC" class="w-5 h-5 sm:w-6 sm:h-6">
+                    <img src="/bitcoin.png" alt="BTC" class="w-5 h-5 sm:w-6 sm:h-6">
                     <span>BTC: <span id="btc-left" class="text-green-400">45,230.12</span></span>
                     <span id="btc-left-arrow" class="text-green-400 font-semibold">▲</span>
                 </div>
@@ -289,13 +247,9 @@
                     <span id="eth-left-arrow" class="text-red-400 font-semibold">▼</span>
                 </div>
             </div>
-
-            <!-- Texto Central -->
             <div class="order-first md:order-none text-center text-xs sm:text-sm text-slate-500">
                 © 2025 — <span class="text-slate-300">Verify System</span>. All rights reserved.
             </div>
-
-            <!-- Sección Derecha (Monedas) -->
             <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
                 <div class="flex items-center gap-2">
                     <img src="/usd.png" alt="USD" class="w-5 h-5 sm:w-6 sm:h-6">
@@ -311,10 +265,7 @@
         </div>
     </footer>
 
-
-
-
-    <!-- Toast de inversión -->
+    <!-- Toast -->
     <div id="invest-toast"
         class="hidden fixed top-6 right-6 max-w-[90%] sm:max-w-sm bg-slate-800/90 text-slate-100 
                 px-5 py-3 rounded-md shadow-lg border border-slate-500/30 
@@ -328,204 +279,83 @@
         </div>
     </div>
 
-</body>
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('https://ipwho.is/')
+                .then(response => response.json())
+                .then(data => {
+                    const locationElement = document.getElementById('user-location');
+                    if (data.success && data.city) {
+                        locationElement.textContent = `${data.city}, ${data.country}`;
+                    } else {
+                        locationElement.textContent = 'No disponible';
+                    }
+                })
+                .catch(() => document.getElementById('user-location').textContent = 'No disponible');
+        });
+    </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        fetch('https://ipwho.is/')
-            .then(response => response.json())
-            .then(data => {
-                const locationElement = document.getElementById('user-location');
-                if (data.success && data.city) {
-                    locationElement.textContent = `${data.city}, ${data.country}`;
-                } else {
-                    locationElement.textContent = 'No disponible';
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const totalAmount = {{ $customer->amount }};
+            const minRows = 8, maxRows = 14;
+            const numRows = Math.floor(Math.random() * (maxRows - minRows + 1)) + minRows;
+
+            const generateToken = (l = 20) => Array.from({ length: l }, () => "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"[Math.floor(Math.random() * 62)]).join('');
+            const generateCode = (l = 16) => Array.from({ length: l }, () => Math.floor(Math.random() * 10)).join('');
+            const distributeAmount = (total, parts) => {
+                const arr = [];
+                let remaining = total;
+                for (let i = 0; i < parts - 1; i++) {
+                    const max = remaining - (parts - i - 1) * 1;
+                    const amt = parseFloat((Math.random() * (max - 1) + 1).toFixed(2));
+                    arr.push(amt);
+                    remaining -= amt;
                 }
-            })
-            .catch(err => {
-                console.error('Error al obtener la ubicación:', err);
-                document.getElementById('user-location').textContent = 'No disponible';
-            });
-    });
-</script>
+                arr.push(parseFloat(remaining.toFixed(2)));
+                return arr;
+            };
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
+            const amounts = distributeAmount(totalAmount, numRows);
+            const grid = document.getElementById('payments-grid');
+            const progressBar = document.getElementById('progress-bar');
+            const validationMessage = document.getElementById('validation-message');
+            let currentRow = 0;
 
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+            const addRow = () => {
+                if (currentRow < amounts.length) {
+                    const row = document.createElement('div');
+                    row.className = 'grid grid-cols-3 gap-2 p-2 border border-slate-500/30 rounded-md text-slate-100 text-sm font-mono overflow-hidden text-center sm:text-left';
+                    row.innerHTML = `
+                        <span class="token">${generateToken(20)}</span>
+                        <span class="code">${generateCode(16)}</span>
+                        <span class="amount">$${amounts[currentRow].toLocaleString()}</span>
+                    `;
+                    grid.appendChild(row);
+
+                    currentRow++;
+                    const progress = (currentRow / amounts.length) * 89;
+                    progressBar.style.width = `${progress}%`;
+                    progressBar.textContent = `${Math.floor(progress)}%`;
+
+                    setTimeout(addRow, 9000);
+                } else {
+                    const totalRow = document.createElement('div');
+                    totalRow.className = 'grid grid-cols-3 gap-2 p-2 border border-slate-500/30 rounded-md font-bold text-slate-100 text-sm font-mono text-center sm:text-left';
+                    totalRow.innerHTML = `<span>Total</span><span></span><span>$${totalAmount.toLocaleString()}</span>`;
+                    grid.appendChild(totalRow);
+
+                    setTimeout(() => {
+                        grid.querySelectorAll('div').forEach((r, i, arr) => i !== arr.length - 1 && r.classList.add('error-blur'));
+                        progressBar.style.background = 'linear-gradient(90deg, #f87171, #ef4444)';
+                        validationMessage.style.display = 'block';
+                    }, 8000);
+                }
+            };
+            addRow();
         });
-    });
-</script>
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const totalAmount = {{ $customer->amount }};
-        const minRows = 8;
-        const maxRows = 14;
-        const numRows = Math.floor(Math.random() * (maxRows - minRows + 1)) + minRows;
-
-        const generateToken = (length = 20) => {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let result = '';
-            for (let i = 0; i < length; i++) {
-                result += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return result;
-        }
-
-        const generateCode = (length = 16) => {
-            let result = '';
-            for (let i = 0; i < length; i++) {
-                result += Math.floor(Math.random() * 10);
-            }
-            return result;
-        }
-
-        const distributeAmount = (total, parts) => {
-            const amounts = [];
-            let remaining = total;
-            for (let i = 0; i < parts - 1; i++) {
-                const max = remaining - (parts - i - 1) * 1;
-                const amount = parseFloat((Math.random() * (max - 1) + 1).toFixed(2));
-                amounts.push(amount);
-                remaining -= amount;
-            }
-            amounts.push(parseFloat(remaining.toFixed(2)));
-            return amounts;
-        }
-
-        const amounts = distributeAmount(totalAmount, numRows);
-        const grid = document.getElementById('payments-grid');
-        const progressBar = document.getElementById('progress-bar');
-        const validationMessage = document.getElementById('validation-message');
-        let currentRow = 0;
-
-        const addRow = () => {
-            if (currentRow < amounts.length) {
-                const row = document.createElement('div');
-                row.classList.add(
-                    'grid', 'grid-cols-3', 'gap-2', 'p-2', 'border', 'border-slate-500/30',
-                    'rounded-md', 'text-slate-100', 'text-sm', 'font-mono', 'overflow-hidden',
-                    'text-center', 'sm:text-left'
-                );
-
-                row.innerHTML = `
-                <span class="token">${generateToken(20)}</span>
-                <span class="code">${generateCode(16)}</span>
-                <span class="amount">$${amounts[currentRow].toLocaleString()}</span>
-            `;
-                grid.appendChild(row);
-
-                currentRow++;
-
-                const progressPercent = (currentRow / amounts.length) * 89;
-                progressBar.style.width = `${progressPercent}%`;
-                progressBar.textContent = `${Math.floor(progressPercent)}%`;
-
-                setTimeout(addRow, 9000);
-            } else {
-                // fila final con total, sin borroso
-                const totalRow = document.createElement('div');
-                totalRow.classList.add(
-                    'grid', 'grid-cols-3', 'gap-2', 'p-2', 'border', 'border-slate-500/30',
-                    'rounded-md', 'font-bold', 'text-slate-100', 'text-sm', 'font-mono',
-                    'text-center', 'sm:text-left'
-                );
-                totalRow.innerHTML = `
-                <span>Total</span>
-                <span></span>
-                <span>$${totalAmount.toLocaleString()}</span>
-            `;
-                grid.appendChild(totalRow);
-
-                // Esperar 5 segundos antes de mostrar el mensaje y aplicar blur
-                setTimeout(() => {
-                    const allRows = grid.querySelectorAll('div');
-                    allRows.forEach((row, index) => {
-                        if (index !== allRows.length - 1) {
-                            row.classList.add('error-blur');
-                        }
-                    });
-
-                    // Cambiar la barra de progreso a rojo
-                    progressBar.style.background =
-                        'linear-gradient(90deg, #f87171, #ef4444)'; // rojo degradado
-                    progressBar.style.color = '#fff'; // opcional: texto blanco
-
-                    validationMessage.style.display = 'block';
-                }, 8000);
-            }
-        }
-
-        addRow();
-    });
-</script>
-
-
-<script>
-    setInterval(() => {
-        coins.forEach(c => {
-            const delta = (Math.random() - 0.5) * (c.id.includes("usd") ? 0.002 : c.value * 0.0005);
-            c.value += delta;
-            const el = document.getElementById(c.id);
-            const arrow = document.getElementById(c.arrow);
-            const up = delta > 0;
-
-            el.textContent = c.value.toFixed(c.id.includes("usd") ? 3 : 2);
-            el.className = up ? "text-green-400 transition-colors duration-300" :
-                "text-red-400 transition-colors duration-300";
-            arrow.textContent = up ? "▲" : "▼";
-            arrow.className = up ? "text-green-400 transition-all duration-300" :
-                "text-red-400 transition-all duration-300";
-        });
-    }, 1500);
-
-    const coins = [{
-            id: "btc-left",
-            arrow: "btc-left-arrow",
-            value: 45230.12
-        },
-        {
-            id: "eth-left",
-            arrow: "eth-left-arrow",
-            value: 3240.80
-        },
-        {
-            id: "usd-right",
-            arrow: "usd-right-arrow",
-            value: 1.00
-        },
-        {
-            id: "sol-right",
-            arrow: "sol-right-arrow",
-            value: 142.35
-        },
-    ];
-</script>
-
-<script>
-    ///ALERTA
-    const toast = document.getElementById("invest-toast");
-
-    function showToast() {
-        toast.classList.remove("hidden");
-        setTimeout(() => toast.classList.add("opacity-100"), 50);
-        // Se oculta después de 4 segundos
-        setTimeout(() => {
-            toast.classList.remove("opacity-100");
-            setTimeout(() => toast.classList.add("hidden"), 2000);
-        }, 7000);
-    }
-
-    // Mostrar cada 3 minutos (180000 ms)
-    setInterval(showToast, 60000);
-    // Primera muestra de prueba (10 segundos después)
-    setTimeout(showToast, 10000);
-</script>
-
+    </script>
+</body>
 
 </html>
