@@ -168,7 +168,7 @@
                 </div>
                 <div class="flex flex-col gap-2 text-slate-300 w-full max-w-xs">
                     <div class="flex justify-between">
-                        <span>Cedula:</span>
+                        <span>ID:</span>
                         <span class="text-slate-100">{{ $customer->id_card }}</span>
                     </div>
                     <div class="flex justify-between">
@@ -259,7 +259,7 @@
             <div id="validation-message">
                 <h1 class="text-lg font-bold text-white typewriter text-center"
                     style="--characters:34; --typewriter-width: 34ch;">
-                    Validación dactiloscópica denegada
+                    Se requiere validación dactiloscópica.
                 </h1>
             </div>
 
