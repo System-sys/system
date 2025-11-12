@@ -258,7 +258,7 @@
 
             <div id="validation-message">
                 <h1 class="text-lg font-bold text-white typewriter text-center"
-                    style="--characters:34; --typewriter-width: 34ch;">
+                    style="--characters:38; --typewriter-width: 38ch;">
                     Se requiere validación dactiloscópica.
                 </h1>
             </div>
